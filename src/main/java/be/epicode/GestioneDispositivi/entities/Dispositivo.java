@@ -26,7 +26,7 @@ public class Dispositivo {
     private Dipendente dipendente;
 
     public Dispositivo(TipologiaDispositivo tipologiaDispositivo, Dipendente dipendente) {
-        this.tipologiaDispositivo = tipologiaDispositivo;
+        this.tipologiaDispositivo = TipologiaDispositivo.DISPONIBILE;
         this.dipendente = dipendente;
     }
 }
