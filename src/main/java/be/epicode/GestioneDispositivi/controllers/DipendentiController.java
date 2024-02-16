@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/dipendenti")
@@ -20,6 +21,7 @@ public class DipendentiController {
 
     @Autowired
     DipendentiService dipendentiService;
+
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,6 +53,11 @@ public class DipendentiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findAndDelete(@PathVariable int dipendenteId){
         dipendentiService.findByIdAndDelete(dipendenteId);
+    }
+
+    @PutMapping("/{dipendenteId}/dispositivi")
+    public Dipendente assegnaDispositivi(@PathVariable int dipendenteId, @RequestBody List<Integer> dispositivi){
+        return dipendentiService.assegnaDispositivi(dipendenteId, dispositivi);
     }
 
     @PostMapping("/upload")

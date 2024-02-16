@@ -1,10 +1,12 @@
 package be.epicode.GestioneDispositivi.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,6 +23,9 @@ public class Dipendente {
     private String cognome;
     private String email;
     private String avatarUrl;
+
+    @OneToMany(mappedBy = "dipendente", cascade = CascadeType.ALL)
+    Set<Dispositivo> dispositivi;
 
     public Dipendente(String username, String nome, String cognome, String email, String avatarUrl) {
         this.username = username;

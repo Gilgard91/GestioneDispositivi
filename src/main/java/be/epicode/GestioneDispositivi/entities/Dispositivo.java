@@ -1,5 +1,6 @@
 package be.epicode.GestioneDispositivi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Dispositivo {
     @Enumerated(EnumType.STRING)
     private TipologiaDispositivo tipologiaDispositivo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dipendente_id")
     private Dipendente dipendente;

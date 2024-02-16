@@ -1,14 +1,10 @@
 package be.epicode.GestioneDispositivi.controllers;
 
 import be.epicode.GestioneDispositivi.entities.Dispositivo;
-import be.epicode.GestioneDispositivi.exceptions.BadRequestException;
-import be.epicode.GestioneDispositivi.payloads.NewDispositivoPayload;
 import be.epicode.GestioneDispositivi.services.DispositiviService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,11 +16,9 @@ public class DispositiviController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Dispositivo saveDispositivo(@RequestBody @Validated NewDispositivoPayload body, BindingResult validation){
-        if(validation.hasErrors()){
-            throw new BadRequestException(validation.getAllErrors());
-        }
-        return this.dispositiviService.save(body);
+    public Dispositivo saveDispositivo(){
+
+        return this.dispositiviService.save();
     }
 
     @GetMapping("")

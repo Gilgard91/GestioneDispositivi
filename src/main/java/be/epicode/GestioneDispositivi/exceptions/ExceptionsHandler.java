@@ -36,7 +36,7 @@ public class ExceptionsHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorsPayload handleGeneric(Exception e) {
         e.printStackTrace();
-        return new ErrorsPayload("Errore generico, risolveremo il prima possibile LMAO", LocalDateTime.now());
+        return new ErrorsPayload("Errore generico, risolveremo il prima possibile", LocalDateTime.now());
     }
 
 }
