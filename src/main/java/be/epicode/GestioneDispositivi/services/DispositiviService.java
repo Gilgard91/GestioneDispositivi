@@ -45,9 +45,15 @@ public class DispositiviService {
         dispositiviDAO.delete(found);
     }
 
-    public Dispositivo findByIdAndUpdate(int id, NewDispositivoPayload body){
+    public Dispositivo findByIdAndUpdate(int id){
         Dispositivo found = this.findById(id);
-        found.setTipologiaDispositivo(TipologiaDispositivo.IN_MANUTENZIONE);
+        TipologiaDispositivo currentTipologia = found.getTipologiaDispositivo();
+
+        if (currentTipologia == TipologiaDispositivo.DISPONIBILE) {
+            found.setTipologiaDispositivo(TipologiaDispositivo.IN_MANUTENZIONE);
+        } else if (currentTipologia == TipologiaDispositivo.IN_MANUTENZIONE) {
+            found.setTipologiaDispositivo(TipologiaDispositivo.DISPONIBILE);
+        }
         return dispositiviDAO.save(found);
     }
 }
