@@ -4,18 +4,25 @@ import be.epicode.GestioneDispositivi.entities.Dipendente;
 import be.epicode.GestioneDispositivi.exceptions.NotFoundException;
 import be.epicode.GestioneDispositivi.payloads.NewDipendentePayload;
 import be.epicode.GestioneDispositivi.repositories.DipendentiDAO;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class DipendentiService {
 
     @Autowired
     DipendentiDAO dipendentiDAO;
+    @Autowired
+    Cloudinary cloudinaryUploader;
 
     public Dipendente save(NewDipendentePayload body){
         Dipendente newDipendente = new Dipendente();
@@ -48,5 +55,10 @@ public class DipendentiService {
         found.setAvatarUrl(body.getAvatarUrl());
         return dipendentiDAO.save(found);
 
+    }
+
+    public String uploadImg(MultipartFile img) throws IOException {
+        String url = (String) cloudinaryUploader.uploader().upload(img.getBytes(), ObjectUtils.emptyMap()).get("url");
+        return url;
     }
 }

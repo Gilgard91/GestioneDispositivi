@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/dipendenti")
@@ -50,5 +53,8 @@ public class DipendentiController {
         dipendentiService.findByIdAndDelete(dipendenteId);
     }
 
-
+    @PostMapping("/upload")
+    public String uploadAvatar(@RequestParam("avatar") MultipartFile img) throws IOException {
+        return this.dipendentiService.uploadImg(img);
+    }
 }
